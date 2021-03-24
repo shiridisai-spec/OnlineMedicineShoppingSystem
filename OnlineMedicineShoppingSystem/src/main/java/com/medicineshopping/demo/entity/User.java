@@ -21,6 +21,10 @@ public class User {
 	@SuppressWarnings("rawtypes")
 	@ManyToMany(targetEntity=ProductManagement.class)
 	private List med;
+	@ManyToMany(targetEntity=CartManagement.class)
+	private List cart;
+	@ManyToMany(targetEntity=PaymentManagement.class)
+	private List payment;
 	public int getUserId() {
 		return userId;
 	}
@@ -45,20 +49,33 @@ public class User {
 	public void setUserPhno(long userPhno) {
 		this.userPhno = userPhno;
 	}
-	@SuppressWarnings("rawtypes")
 	public List getMed() {
 		return med;
 	}
 	public void setMed(List med) {
 		this.med = med;
 	}
-	public User(int userId, String userName, String userAddress, long userPhno, List med) {
+	public List getCart() {
+		return cart;
+	}
+	public void setCart(List cart) {
+		this.cart = cart;
+	}
+	public List getPayment() {
+		return payment;
+	}
+	public void setPayment(List payment) {
+		this.payment = payment;
+	}
+	public User(int userId, String userName, String userAddress, long userPhno, List med, List cart, List payment) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.userAddress = userAddress;
 		this.userPhno = userPhno;
 		this.med = med;
+		this.cart = cart;
+		this.payment = payment;
 	}
 	public User() {
 		super();
@@ -67,7 +84,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", userAddress=" + userAddress + ", userPhno="
-				+ userPhno + ", med=" + med + "]";
+				+ userPhno + ", med=" + med + ", cart=" + cart + ", payment=" + payment + "]";
 	}
+	
+	
 	
 }

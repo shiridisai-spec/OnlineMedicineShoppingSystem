@@ -1,10 +1,12 @@
 package com.medicineshopping.demo.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +21,8 @@ public class ProductManagement {
 	private Date manufacturingDate;
 	private Date expiryDate;
 	private String medicineDescription;
+	@ManyToMany(targetEntity=User.class)
+	private List user;
 	public int getMedicineId() {
 		return medicineId;
 	}
@@ -55,8 +59,14 @@ public class ProductManagement {
 	public void setMedicineDescription(String medicineDescription) {
 		this.medicineDescription = medicineDescription;
 	}
+	public List getUser() {
+		return user;
+	}
+	public void setUser(List user) {
+		this.user = user;
+	}
 	public ProductManagement(int medicineId, String medicineName, String medicineType, Date manufacturingDate,
-			Date expiryDate, String medicineDescription) {
+			Date expiryDate, String medicineDescription, List user) {
 		super();
 		this.medicineId = medicineId;
 		this.medicineName = medicineName;
@@ -64,6 +74,7 @@ public class ProductManagement {
 		this.manufacturingDate = manufacturingDate;
 		this.expiryDate = expiryDate;
 		this.medicineDescription = medicineDescription;
+		this.user = user;
 	}
 	public ProductManagement() {
 		super();
@@ -73,13 +84,7 @@ public class ProductManagement {
 	public String toString() {
 		return "ProductManagement [medicineId=" + medicineId + ", medicineName=" + medicineName + ", medicineType="
 				+ medicineType + ", manufacturingDate=" + manufacturingDate + ", expiryDate=" + expiryDate
-				+ ", medicineDescription=" + medicineDescription + "]";
+				+ ", medicineDescription=" + medicineDescription + ", user=" + user + "]";
 	}
 	
-	
-	
-	
-	
-	
-
 }
