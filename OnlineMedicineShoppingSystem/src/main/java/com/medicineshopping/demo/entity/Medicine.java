@@ -19,6 +19,8 @@ public class Medicine {
 	private String medicineBrand;
 	private double medicineprice;
 	private String medicineStatus;
+	private String medicineCategory;
+	
 	private LocalDate expiryDate;
 	private String medicineDescription;
 	public int getMedicineId() {
@@ -51,6 +53,12 @@ public class Medicine {
 	public void setMedicineStatus(String medicineStatus) {
 		this.medicineStatus = medicineStatus;
 	}
+	public String getMedicineCategory() {
+		return medicineCategory;
+	}
+	public void setMedicineCategory(String medicineCategory) {
+		this.medicineCategory = medicineCategory;
+	}
 	public LocalDate getExpiryDate() {
 		return expiryDate;
 	}
@@ -63,9 +71,20 @@ public class Medicine {
 	public void setMedicineDescription(String medicineDescription) {
 		this.medicineDescription = medicineDescription;
 	}
+	public Medicine(int medicineId, String medicineName, String medicineBrand, double medicineprice,
+			String medicineStatus, String medicineCategory, LocalDate expiryDate, String medicineDescription) {
+		super();
+		this.medicineId = medicineId;
+		this.medicineName = medicineName;
+		this.medicineBrand = medicineBrand;
+		this.medicineprice = medicineprice;
+		this.medicineStatus = medicineStatus;
+		this.medicineCategory = medicineCategory;
+		this.expiryDate = expiryDate;
+		this.medicineDescription = medicineDescription;
+	}
 	public Medicine()
 	{
 		
 	}
-	
 }
