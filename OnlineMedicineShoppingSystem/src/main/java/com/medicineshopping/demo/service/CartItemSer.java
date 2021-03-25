@@ -1,5 +1,5 @@
 package com.medicineshopping.demo.service;
 
-public interface ProductSer {
+public interface CartItemSer {
 
 }

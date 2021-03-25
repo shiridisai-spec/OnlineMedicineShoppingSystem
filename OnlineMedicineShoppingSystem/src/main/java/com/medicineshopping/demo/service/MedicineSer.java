@@ -1,5 +1,5 @@
 package com.medicineshopping.demo.service;
 
-public class AdminSerImpl {
+public interface MedicineSer {
 
 }

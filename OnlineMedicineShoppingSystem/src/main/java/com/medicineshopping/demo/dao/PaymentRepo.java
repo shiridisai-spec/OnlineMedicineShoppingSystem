@@ -2,8 +2,8 @@ package com.medicineshopping.demo.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.medicineshopping.demo.entity.PaymentManagement;
+import com.medicineshopping.demo.entity.Payment;
 
-public interface PaymentRepo extends JpaRepository<PaymentManagement,Integer>{
+public interface PaymentRepo extends JpaRepository<Payment,Integer>{
 
 }

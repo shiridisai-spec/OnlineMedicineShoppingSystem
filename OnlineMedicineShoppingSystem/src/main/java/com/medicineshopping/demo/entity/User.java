@@ -1,30 +1,23 @@
 package com.medicineshopping.demo.entity;
 
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name="medicine_user")
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@Column(name="user_id")
 	private int userId;
 	private String userName;
 	private String userAddress;
 	private long userPhno;
-	@SuppressWarnings("rawtypes")
-	@ManyToMany(targetEntity=ProductManagement.class)
-	private List med;
-	@ManyToMany(targetEntity=CartManagement.class)
-	private List cart;
-	@ManyToMany(targetEntity=PaymentManagement.class)
-	private List payment;
+	private String userPassword;
 	public int getUserId() {
 		return userId;
 	}
@@ -49,44 +42,26 @@ public class User {
 	public void setUserPhno(long userPhno) {
 		this.userPhno = userPhno;
 	}
-	public List getMed() {
-		return med;
+	public String getUserName1() {
+		return userName;
 	}
-	public void setMed(List med) {
-		this.med = med;
+	public String getUserPassword() {
+		return userPassword;
 	}
-	public List getCart() {
-		return cart;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-	public void setCart(List cart) {
-		this.cart = cart;
-	}
-	public List getPayment() {
-		return payment;
-	}
-	public void setPayment(List payment) {
-		this.payment = payment;
-	}
-	public User(int userId, String userName, String userAddress, long userPhno, List med, List cart, List payment) {
+	public User(int userId, String userName, String userAddress, long userPhno, String userPassword) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.userAddress = userAddress;
 		this.userPhno = userPhno;
-		this.med = med;
-		this.cart = cart;
-		this.payment = payment;
+		this.userPassword = userPassword;
 	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public User()
+	{
+		
 	}
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", userAddress=" + userAddress + ", userPhno="
-				+ userPhno + ", med=" + med + ", cart=" + cart + ", payment=" + payment + "]";
-	}
-	
-	
 	
 }
