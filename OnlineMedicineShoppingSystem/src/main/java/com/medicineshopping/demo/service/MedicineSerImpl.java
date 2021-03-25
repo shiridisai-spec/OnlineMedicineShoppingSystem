@@ -2,6 +2,7 @@ package com.medicineshopping.demo.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -22,25 +23,32 @@ public class MedicineSerImpl implements MedicineSer{
 	@Autowired
 	MedicineRepo medicinerepo;
 
-	@Override
-	public int addMedicine(MedicineDTO medicinedto) {
-		Medicine medicine=new Medicine();
-		medicine.setMedicineBrand(medicinedto.getMedicineBrand());
-		medicine.setMedicineCategory(medicinedto.getMedicineCategory());
-		medicine.setMedicineName(medicinedto.getMedicineName());
-		medicine.setMedicineDescription(medicinedto.getMedicineDescription());
-		medicine.setMedicineStatus(MedicineConstant.AVAILABLE);
-		medicine.setMedicineprice(medicinedto.getMedicineprice());
-		//String strexpdate=medicinedto.getExpiryDate();
-		//LocalDate ldt=LocalDate.parse(strexpdate,DateTimeFormatter.ofPattern("yyyy-M-d"));
-		medicine.setExpiryDate(medicinedto.getExpiryDate());
-		Medicine newmedicine=medicinerepo.save(medicine);
-		// TODO Auto-generated method stub
-		return newmedicine.getMedicineId();
+	//@Override
+	//public int addMedicine(MedicineDTO medicinedto) {
+	//	Medicine medicine=new Medicine();
+	//	medicine.setMedicineBrand(medicinedto.getMedicineBrand());
+	//	medicine.setMedicineCategory(medicinedto.getMedicineCategory());
+	//	medicine.setMedicineName(medicinedto.getMedicineName());
+	//	medicine.setMedicineDescription(medicinedto.getMedicineDescription());
+	//	medicine.setMedicineStatus(MedicineConstant.AVAILABLE);
+	//	medicine.setMedicineprice(medicinedto.getMedicineprice());
+	//	//String strexpdate=medicinedto.getExpiryDate();
+	//	//LocalDate ldt=LocalDate.parse(strexpdate,DateTimeFormatter.ofPattern("yyyy-M-d"));
+	//	medicine.setExpiryDate(medicinedto.getExpiryDate());
+	//	Medicine newmedicine=medicinerepo.save(medicine);
+	//	// TODO Auto-generated method stub
+	//	return newmedicine.getMedicineId();
+	//}
+    public Medicine addMedicine(Medicine medicine)
+    {
+		return medicinerepo.save(medicine);
+    }
+    
+    @Override
+	public void deleteMedicine(int medicineId) 
+    {
+		medicinerepo.deleteById(medicineId);
 	}
-
-	@Override
-	
 	public Medicine getMedicineById(int medicineId) throws MedicineNotFoundException {
 		// TODO Auto-generated method stub
 		Optional <Medicine> optmedicine=medicinerepo.findById(medicineId);
@@ -51,7 +59,25 @@ public class MedicineSerImpl implements MedicineSer{
 		throw new MedicineNotFoundException(MedicineConstant.MEDICINE_NOT_FOUND);
 	}
 
-	
+	@Override
+	public Medicine updateMedicine(Medicine medicine) {
+		// TODO Auto-generated method stub
+		return medicinerepo.save(medicine);
+	}
+
+	@Override
+	public List<Medicine> getAllMedicineByCategory(String medicineCategory) {
+		// TODO Auto-generated method stub
+		return medicinerepo.findAllMedicinesBymedicineCategory(medicineCategory);
+	}
+
+	@Override
+	public List<Medicine> getAllMedicine() {
+		// TODO Auto-generated method stub
+		return medicinerepo.findAll();
+	}
 	
 
+	
+	
 }

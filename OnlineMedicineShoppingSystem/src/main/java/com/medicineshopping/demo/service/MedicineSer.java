@@ -10,21 +10,20 @@ import com.sun.el.stream.Optional;
 @SuppressWarnings("unused")
 public interface MedicineSer {
 	
-	int addMedicine(MedicineDTO medicinedto);
+	//int addMedicine(MedicineDTO medicinedto);
 	
-	//Medicine updateMedicine(Medicine medicine);
+	Medicine addMedicine(Medicine medicine);
 	
-	//void deleteMedicine(int medicineId);
+	Medicine updateMedicine(Medicine medicine);
 	
-	//List<Medicine> getAllMedicines();
+	void deleteMedicine(int medicineId);
+	
+	List<Medicine> getAllMedicine();
 	
 	Medicine getMedicineById(int medicineId) throws MedicineNotFoundException;
+		
+	List<Medicine> getAllMedicineByCategory(String medicineCategory);
 	
-	//java.util.Optional<Medicine> getMedicineByName(String medicineName);
-	
-	//List<Medicine> getAllMedicineByCategory(String medicineCategory);
-	
-	//List<Medicine> getAllMedicineByBrand(String medicineBrand);
 	
 	
 	

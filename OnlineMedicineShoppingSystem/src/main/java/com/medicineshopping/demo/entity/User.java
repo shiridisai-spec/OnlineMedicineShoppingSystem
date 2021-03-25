@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="medicine_user")
@@ -14,8 +16,10 @@ public class User {
 	@Id
 	@Column(name="user_id")
 	private int userId;
+	@Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
 	private String userName;
 	private String userAddress;
+	@Max(value = 10,message="Phone number cannot be more than 10 numbers")
 	private long userPhno;
 	private String userPassword;
 	public int getUserId() {
