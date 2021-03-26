@@ -2,21 +2,12 @@ package com.medicineshopping.demo.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 public class MedicineDTO {
 	
-	@Pattern(regexp="[A-Z][a-z]{3,20}")
 	private String medicineName;
-	@Size(min=3)
 	private String medicineBrand;
-	@Min(value=20,message="Price must be minimum RS20")
 	private double medicineprice;
 	private String medicineCategory;
-	@Future(message="Expiry Date must be future date")
 	private LocalDate expiryDate;
 	private String medicineDescription;
 	public String getMedicineName() {

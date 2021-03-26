@@ -17,27 +17,43 @@ public class Cart {
 	 @Column(name="cart_id")
 	 private String cartId;
 	 private LocalDate dateOfOrder;
+	 private String cartStatus;
 	 @ManyToOne
 	 @JoinColumn(name="user_id",referencedColumnName = "user_id")
 	 private User user;
+	 
 	public String getCartId() {
 		return cartId;
 	}
+
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
+
 	public LocalDate getDateOfOrder() {
 		return dateOfOrder;
 	}
+
 	public void setDateOfOrder(LocalDate dateOfOrder) {
 		this.dateOfOrder = dateOfOrder;
 	}
+
+	public String getCartStatus() {
+		return cartStatus;
+	}
+
+	public void setCartStatus(String cartStatus) {
+		this.cartStatus = cartStatus;
+	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Cart()
 	{
 		
