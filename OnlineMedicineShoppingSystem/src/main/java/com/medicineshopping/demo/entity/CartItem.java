@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name="medicine_cartitem")
 public class CartItem {
 	
-	@Id
+	@Id 
 	@Column(name="cart_item_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int cartitemId;

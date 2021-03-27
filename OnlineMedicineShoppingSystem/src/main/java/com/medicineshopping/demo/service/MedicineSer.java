@@ -10,9 +10,9 @@ import com.sun.el.stream.Optional;
 @SuppressWarnings("unused")
 public interface MedicineSer {
 	
-	//int addMedicine(MedicineDTO medicinedto);
+	int addMedicine(MedicineDTO medicinedto);
 	
-	Medicine addMedicine(Medicine medicine);
+	//Medicine addMedicine(Medicine medicine);
 	
 	Medicine updateMedicine(Medicine medicine);
 	

@@ -1,50 +1,64 @@
 package com.medicineshopping.demo.service;
 
-import java.io.IOException;
-
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.medicineshopping.demo.constant.CartConstant;
+import com.medicineshopping.demo.constant.UserConstant;
 import com.medicineshopping.demo.dao.CartRepo;
+import com.medicineshopping.demo.dao.UserRepo;
 import com.medicineshopping.demo.entity.Cart;
+import com.medicineshopping.demo.entity.User;
+import com.medicineshopping.demo.exceptions.CartException;
+import com.medicineshopping.demo.exceptions.UserNotFoundException;
 
+@Service("cartservice")
+@Transactional
 public class CartSerImpl implements CartSer {
 	
-	//@Autowired
-	//CartRepo cartrepo;
-
-	//@Override
-	//public Cart addCart(Cart cart) {
+	@Autowired
+	private CartRepo cartrepo;
+	@Autowired
+	private UserRepo userrepo;
+    
+	@Override
+	public String confirmOrder(int userId) throws UserNotFoundException, CartException {
 		// TODO Auto-generated method stub
-	//	return cartrepo.save(cart);
-	//}
+		 Optional<User> optuser=userrepo.findById(userId);
+		    if(optuser.isEmpty())
+		    {
+		    	throw new UserNotFoundException(UserConstant.USER_NOT_FOUND);
+		    }
+		    Cart cart=cartrepo.getCart(userId, CartConstant.CART);
+		    if(cart==null)
+		    {
+		    	throw new CartException(CartConstant.CART_EMPTY);
+		    }
+		    cart.setCartStatus(CartConstant.CART_ORDER_STATUS);
+		    cartrepo.save(cart);
+		    return cart.getCartId();
+	}
 
-	//@Override
-	//public Cart getCartById(int cartId) {
+	@Override
+	public List<Cart> getOrders(int userId) throws UserNotFoundException, CartException {
 		// TODO Auto-generated method stub
-	//	return cartrepo.findUserByCartId(cartId);
-	//}
+		Optional<User> optuser=userrepo.findById(userId);
+	    if(optuser.isEmpty())
+	    {
+	    	throw new UserNotFoundException(UserConstant.USER_NOT_FOUND);
+	    }
+	    List<Cart> carts=cartrepo.getOrder(userId, CartConstant.CART_ORDER_STATUS);
+	    if(carts.isEmpty())
+	    {
+	    	throw new CartException(CartConstant.ORDER_EMPTY);
+	    }
+		return carts;
+	}
 
 	
 	
-	//@Override
-	//public Cart updateCart(Cart cart) {
-		// TODO Auto-generated method stub
-	//	return cartrepo.save(cart);
-	//}
-
-//	@Override
-//	public Cart validateUser(int cartId) throws IOException {
-//		// TODO Auto-generated method stub
-//		Cart cart=getCartById(cartId);
-//		if(cart==null || cart.getCartItems().size()==0)
-//		{
-//			throw new IOException(cartId +" ");
-//		}
-//		updateCart(cart);
-//		return getCartById(cartId);
-	
-
 }

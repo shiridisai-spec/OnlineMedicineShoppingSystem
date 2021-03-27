@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medicineshopping.demo.constant.MedicineConstant;
+import com.medicineshopping.demo.dto.MedicineDTO;
 import com.medicineshopping.demo.dto.SuccessMessageDTO;
 import com.medicineshopping.demo.entity.Medicine;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
@@ -25,14 +26,15 @@ import com.medicineshopping.demo.service.MedicineSer;
 @RestController
 public class MedicineController {
 	
-	@Autowired
+	@Autowired 
 	MedicineSer medicineser;
 	@PostMapping("addmedicine")
-	public SuccessMessageDTO addMedicine(@Valid @RequestBody Medicine medicine, BindingResult br) throws ValidateException
+	public SuccessMessageDTO addMedicine(@Valid @RequestBody MedicineDTO medicinedto, BindingResult br) throws ValidateException
 	{
 		if(br.hasErrors()) 
 			throw new ValidateException(br.getFieldErrors());
-		Medicine id=medicineser.addMedicine(medicine);
+		//Medicine id=medicineser.addMedicine(medicinedto);
+		int id=medicineser.addMedicine(medicinedto);
 		return new SuccessMessageDTO(MedicineConstant.MEDICINE_ADDED + id);
 	}
 	

@@ -1,4 +1,4 @@
-package com.medicineshopping;
+package com.medicineshopping.demo;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -39,5 +39,5 @@ public class OnlineMedicineShoppingSystemApplicationTests {
 	{
 		assertThrows(MedicineNotFoundException.class, ()->medicineser.getMedicineById(100));
 	}
-
+    
 }

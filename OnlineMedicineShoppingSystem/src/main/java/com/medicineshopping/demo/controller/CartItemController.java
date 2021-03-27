@@ -18,17 +18,18 @@ import com.medicineshopping.demo.entity.CartItem;
 import com.medicineshopping.demo.exceptions.CartException;
 import com.medicineshopping.demo.exceptions.CartItemException;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
+import com.medicineshopping.demo.exceptions.UserNotFoundException;
 import com.medicineshopping.demo.exceptions.ValidateException;
 import com.medicineshopping.demo.service.CartItemSer;
 
-@RestController
+@RestController //Handles web Requests
 public class CartItemController {
 	
 	@Autowired
 	CartItemSer cartitemser;
 	
 	@PostMapping("addcartitem")
-	public SuccessMessageDTO addcartitem(@Valid @RequestBody CartItemDTO cartitemdto, BindingResult br) throws ValidateException, CartException, MedicineNotFoundException
+	public SuccessMessageDTO addcartitem(@Valid @RequestBody CartItemDTO cartitemdto, BindingResult br) throws ValidateException, CartException, MedicineNotFoundException, UserNotFoundException
 	{
 		if(br.hasErrors()) 
 			throw new ValidateException(br.getFieldErrors());

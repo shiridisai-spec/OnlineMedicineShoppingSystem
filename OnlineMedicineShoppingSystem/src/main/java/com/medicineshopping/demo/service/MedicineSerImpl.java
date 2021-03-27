@@ -23,26 +23,23 @@ public class MedicineSerImpl implements MedicineSer{
 	@Autowired
 	MedicineRepo medicinerepo;
 
-	//@Override
-	//public int addMedicine(MedicineDTO medicinedto) {
-	//	Medicine medicine=new Medicine();
-	//	medicine.setMedicineBrand(medicinedto.getMedicineBrand());
-	//	medicine.setMedicineCategory(medicinedto.getMedicineCategory());
-	//	medicine.setMedicineName(medicinedto.getMedicineName());
-	//	medicine.setMedicineDescription(medicinedto.getMedicineDescription());
-	//	medicine.setMedicineStatus(MedicineConstant.AVAILABLE);
-	//	medicine.setMedicineprice(medicinedto.getMedicineprice());
-	//	//String strexpdate=medicinedto.getExpiryDate();
-	//	//LocalDate ldt=LocalDate.parse(strexpdate,DateTimeFormatter.ofPattern("yyyy-M-d"));
-	//	medicine.setExpiryDate(medicinedto.getExpiryDate());
-	//	Medicine newmedicine=medicinerepo.save(medicine);
-	//	// TODO Auto-generated method stub
-	//	return newmedicine.getMedicineId();
-	//}
-    public Medicine addMedicine(Medicine medicine)
-    {
-		return medicinerepo.save(medicine);
-    }
+     @Override
+	 public int addMedicine(MedicineDTO medicinedto) {
+		Medicine medicine=new Medicine();
+		medicine.setMedicineBrand(medicinedto.getMedicineBrand());
+		medicine.setMedicineCategory(medicinedto.getMedicineCategory());
+		medicine.setMedicineName(medicinedto.getMedicineName());
+		medicine.setMedicineDescription(medicinedto.getMedicineDescription());
+		medicine.setMedicineStatus(MedicineConstant.AVAILABLE);
+		medicine.setMedicineprice(medicinedto.getMedicineprice());
+		LocalDate strexpdate=medicinedto.getExpiryDate();
+		//LocalDate ldt=LocalDate.parse(strexpdate,DateTimeFormatter.ofPattern("yyyy-M-d"));
+		medicine.setExpiryDate(medicinedto.getExpiryDate());
+		Medicine newmedicine=medicinerepo.save(medicine);
+		// TODO Auto-generated method stub
+		return newmedicine.getMedicineId();
+	}
+ 
     
     @Override
 	public void deleteMedicine(int medicineId) 

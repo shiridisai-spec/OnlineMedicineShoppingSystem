@@ -7,10 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="medicine_details")
@@ -19,16 +15,12 @@ public class Medicine {
 	@GeneratedValue
 	@Column(name="medicine_id")
 	private int medicineId;
-	@Pattern(regexp="[A-Z][a-z]{3,20}")
 	private String medicineName;
-	@Size(min=3)
 	private String medicineBrand;
-	@Min(value=20,message="Price must be minimum RS20")
 	private double medicineprice;
 	private String medicineStatus;
 	private String medicineStock;
 	private String medicineCategory;
-	@Future(message="Expiry Date must be future date")
 	private LocalDate expiryDate;
 	private String medicineDescription;
 	

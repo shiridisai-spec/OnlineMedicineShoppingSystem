@@ -19,7 +19,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+ 
 }
 
 test {
