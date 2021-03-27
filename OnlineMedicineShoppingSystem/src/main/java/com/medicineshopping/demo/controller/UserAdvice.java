@@ -23,13 +23,15 @@ public class UserAdvice {
 	{
 		return new ErrorMessageDTO(UserConstant.USER_NOT_FOUND,HttpStatus.NOT_FOUND.toString());
 	}
-	@ExceptionHandler(ValidateException.class)
-	@ResponseStatus(HttpStatus.FORBIDDEN)
-	public ErrorMessageDTO handleValidateException(ValidateException exception)
-	{
-		List<String> lstmesagges=exception.getLserror().stream().map(m->m.getDefaultMessage().toString()).collect(Collectors.toList());
-		return new ErrorMessageDTO(lstmesagges);
-	}
+	
+	//@ExceptionHandler(ValidateException.class)
+	//@ResponseStatus(HttpStatus.FORBIDDEN)
+	//public ErrorMessageDTO handleValidateException(ValidateException exception)
+	//{
+	//	List<String> lstmesagges=exception.getLserror().stream().map(m->m.getDefaultMessage().toString()).collect(Collectors.toList());
+	//	return new ErrorMessageDTO(lstmesagges);
+	//}
+	
 	
 
 }

@@ -36,9 +36,11 @@ public class CartItemSerImpl implements CartItemSer {
 		Optional<Cart> optcart=cartrepo.findById(cartitemdto.getCart_id());
 		if(optcart.isEmpty()) throw new CartException(CartConstant.CART_NOT_FOUND);
 		Cart cart=optcart.get();
+		
 		Optional<Medicine> optmedicine=medicinerepo.findById(cartitemdto.getMedicine_id());
 		if(optmedicine.isEmpty()) throw new MedicineNotFoundException(MedicineConstant.MEDICINE_NOT_FOUND);
 		CartItem cartitem=new CartItem();
+		
 		cartitem.setCart(cart);
 		cartitem.setMedicine(optmedicine.get());
 		cartitem.setQuantity(cartitemdto.getQuantity());
