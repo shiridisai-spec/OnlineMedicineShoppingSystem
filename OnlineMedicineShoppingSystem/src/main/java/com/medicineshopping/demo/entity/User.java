@@ -2,24 +2,27 @@ package com.medicineshopping.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name="medicine_user")
+
+/**
+ * @author shirdisai
+ *
+ */
+@Entity //Entity is a group of states associated together in a single unit
+@Table(name="medicine_user") //Creates table with a table name
 public class User {
 	
-	@Id
-	@Column(name="user_id")
+	@Id //Specifies primary key of entity
+	@Column(name="user_id") //Names the column 
+	@NotNull(message="userid cannot be null") //Specifies that the value cannot be null
 	private int userId;
-	@Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
 	private String userName;
 	private String userAddress;
-	@Max(value = 10,message="Phone number cannot be more than 10 numbers")
+	@Pattern(regexp="[0-9]{10}")
 	private long userPhno;
 	private String userPassword;
 	public int getUserId() {

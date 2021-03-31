@@ -1,5 +1,10 @@
 package com.medicineshopping.demo.exceptions;
 
+/**
+ * @author shirdisai
+ *
+ */
+@SuppressWarnings("serial") //Disables compiler warnings
 public class PaymentException extends Exception {
 
 	public PaymentException() {

@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medicineshopping.demo.exceptions.CartException;
 import com.medicineshopping.demo.exceptions.UserNotFoundException;
 import com.medicineshopping.demo.service.CartSer;
-@RestController
+
+/**
+ * @author shirdisai
+ *
+ */
+@RestController //Maps the web requests
 public class CartController {
 	
-	@Autowired
+	@Autowired //Injects the object dependencies
 	CartSer cartser;
 	
 	//confirmcart
-	@GetMapping("confirmcart/{uid}")
+	@GetMapping("confirmcart/{uid}") //Maps the HTTP GET requests on the specific handler method
 	public String confirmCart(@PathVariable("uid") int userId) throws UserNotFoundException, CartException
 	{
 		return cartser.confirmOrder(userId);
@@ -25,8 +30,8 @@ public class CartController {
 	}
 	
 	//vieworderbyuserid
-	@SuppressWarnings("rawtypes")
-	@GetMapping("vieworder/{uid}")
+	@SuppressWarnings("rawtypes") //Disbales compiler warnings
+	@GetMapping("vieworder/{uid}") //Maps the HTTP GET requests on the specific handler method
 	public List viewOrders(@PathVariable("uid") int userId) throws UserNotFoundException, CartException
 	{
 		return cartser.getOrders(userId);	

@@ -1,5 +1,7 @@
 package com.medicineshopping.demo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medicineshopping.demo.constant.MedicineConstant;
 import com.medicineshopping.demo.constant.UserConstant;
 import com.medicineshopping.demo.dto.SuccessMessageDTO;
-import com.medicineshopping.demo.entity.Medicine;
 import com.medicineshopping.demo.entity.User;
 import com.medicineshopping.demo.exceptions.UserNotFoundException;
 import com.medicineshopping.demo.exceptions.ValidateException;
 import com.medicineshopping.demo.service.UserSer;
 
-@RestController
+/**
+ * @author shirdisai
+ *
+ */
+@RestController //Maps the web requests
 public class UserController {
 	
-	@Autowired
+	@Autowired //Injects the object dependencies
 	UserSer userser;
-	@PostMapping("adduser")
+	@PostMapping("adduser") // Maps the HTTP POST requests on the specific handler method
 	public SuccessMessageDTO addUser(@Valid @RequestBody User user,BindingResult br) throws ValidateException
 	{
 		if(br.hasErrors()) 
@@ -32,10 +36,18 @@ public class UserController {
 		User id=userser.addUser(user);
 		return new SuccessMessageDTO(UserConstant.USER_ADDED + id);
 	}
-	@GetMapping("getuserbyid/{uid}")
-	public User  getUserById(@PathVariable(name="uid") int userId) throws UserNotFoundException
+	
+	@GetMapping("getuserbyid/{uid}") //Maps the HTTP GET requests on the specific handler method
+	public SuccessMessageDTO getUserById(@PathVariable(name="uid") int userId) throws UserNotFoundException
 	{
-		return userser.getUserById(userId);	
+		userser.getUserById(userId);
+		return new SuccessMessageDTO(UserConstant.USER_GET);
 	}
-
+    
+	@GetMapping("getallusers")
+	public List<User> fetchAllUsers() throws UserNotFoundException
+	{
+		return userser.getAllUsers();
+		
+	}
 }

@@ -8,23 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name="medicine_payment")
+/**
+ * @author shirdisai
+ *
+ */
+@Entity //Entity is a group of states associated together in a single unit
+@Table(name="medicine_payment") //Creates table with a table name
 public class Payment {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id //Specifies primary key of entity
+	@GeneratedValue(strategy=GenerationType.AUTO) //Generates automatic object ID's for entity objects
 	private int paymentId;
-	@ManyToOne
-	@JoinColumn(name="user_id",referencedColumnName = "user_id")
+	@ManyToOne //Manytoone relationship
+	@JoinColumn(name="user_id",referencedColumnName = "user_id") //user_id is primary key of User class and foreign key of Payment class
 	private User user;
-	@ManyToOne
-    @JoinColumn(name="cart_id",referencedColumnName = "cart_id")
+	@ManyToOne //Manytoone relationship
+    @JoinColumn(name="cart_id",referencedColumnName = "cart_id") //cart_id is primary key of Cart class and foreign key of Payment class
 	private Cart cart;
+	@NotNull(message="cardType cannot be null")
 	private String cardType;
+	@Pattern(regexp="[A-Za-z0-9]{16}")
 	private String cardNo;
-	@Column(name="paymentamount",nullable=true)
+	@Column(name="paymentamount",nullable=true) //Names the column 
 	private double paymentamount;
 	
 	public int getPaymentId() {

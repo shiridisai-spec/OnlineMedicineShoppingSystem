@@ -1,6 +1,5 @@
 package com.medicineshopping.demo.service;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,17 +26,21 @@ import com.medicineshopping.demo.exceptions.CartItemException;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
 import com.medicineshopping.demo.exceptions.UserNotFoundException;
 
-@Service("cartitemservice")
-@Transactional
+/**
+ * @author shirdisai
+ *
+ */
+@Service("cartitemservice") //Contains actual business logic
+@Transactional //Defines Scope of a single database transcation
 public class CartItemSerImpl implements CartItemSer {
 
-	@Autowired
+	@Autowired //Injects object dependencies
 	private CartItemRepo  cartitemrepo;
-	@Autowired
+	@Autowired //Injects object dependencies
 	private CartRepo cartrepo;
-	@Autowired
+	@Autowired //Injects object dependencies
 	private UserRepo userrepo;
-	@Autowired
+	@Autowired //Injects object dependencies
 	private MedicineRepo medicinerepo;
 	@Override
 	public CartItem addCartItem(CartItemDTO cartitemdto) throws CartException, MedicineNotFoundException, UserNotFoundException {
@@ -45,6 +48,7 @@ public class CartItemSerImpl implements CartItemSer {
 	//Optional<Cart> optcart=cartrepo.findById(cartitemdto.getCart_id());
 	//	if(optcart.isEmpty()) throw new CartException(CartConstant.CART_NOT_FOUND);
 	//	Cart cart=optcart.get();
+		//Optional is a container that contains non-null objects
 	    Optional<User> optuser=userrepo.findById(cartitemdto.getUserId());
 	    if(optuser.isEmpty())
 	    {
@@ -75,6 +79,7 @@ public class CartItemSerImpl implements CartItemSer {
 	@Override
 	public CartItem editCartItem(int cartitemId,int quantity) throws CartItemException{
 		// TODO Auto-generated method stub
+		//Optional is a container that contains non-null objects
 		Optional<CartItem> optcartitem=cartitemrepo.findById(cartitemId);
 		if(optcartitem.isEmpty()) throw new CartItemException(CartConstant.CART_ITEM_NOT_FOUND);
 		CartItem item=optcartitem.get();

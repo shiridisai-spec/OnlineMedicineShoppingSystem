@@ -10,13 +10,17 @@ import org.springframework.stereotype.Repository;
 
 import com.medicineshopping.demo.entity.Cart;
 
-@Repository
+/**
+ * @author shirdisai
+ *
+ */
+@Repository //Does all the database operations
 public interface CartRepo extends JpaRepository<Cart,String> {
 	
-	@Query("From Cart t where t.user.userId=:userid and t.cartStatus=:cstatus")
-	public Cart getCart(@Param("userid")int userId, @Param("cstatus") String cartStatus);
-	@Query("From Cart t where t.user.userId=:userid and t.cartStatus=:cstatus")
-	public List<Cart> getOrder(@Param("userid")int userId,@Param("cstatus")String cartStatus);
+	@Query("From Cart t where t.user.userId=:userid and t.cartStatus=:cstatus") //Declares finder queries directly on repository methods
+	public Cart getCart(@Param("userid")int userId, @Param("cstatus") String cartStatus); //@Param Extracts the query parameters
+	@Query("From Cart t where t.user.userId=:userid and t.cartStatus=:cstatus") //Declares finder queries directly on repository methods
+	public List<Cart> getOrder(@Param("userid")int userId,@Param("cstatus")String cartStatus); //@Param Extracts the query parameters
 	
 	
 	

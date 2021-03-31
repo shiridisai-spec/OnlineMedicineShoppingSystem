@@ -8,21 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
-@Entity
-@Table(name="medicine_cartitem")
+/**
+ * @author shirdisai
+ *
+ */
+@Entity //Entity is a group of states associated together in a single unit
+@Table(name="medicine_cartitem") //Creates table with a table name
 public class CartItem {
 	
-	@Id 
-	@Column(name="cart_item_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id //Specifies primary key of entity
+	@Column(name="cart_item_id") //Names the column
+	@GeneratedValue(strategy=GenerationType.AUTO) //Autogeneration of values
 	private int cartitemId;
-	@ManyToOne
-	@JoinColumn(name="cart_id", referencedColumnName = "cart_id")
+	@ManyToOne //Manytoone relationship
+	@JoinColumn(name="cart_id", referencedColumnName = "cart_id") //cart_id is the primary key of cart and foreign key of CartItem class
 	private Cart cart;
-	@ManyToOne
-	@JoinColumn(name="medicine_id",referencedColumnName = "medicine_id")
+	@ManyToOne //Manytoone relationship
+	@JoinColumn(name="medicine_id",referencedColumnName = "medicine_id") //medicine_id is the primary key of Medicine class and foreign key of CartItem class
 	private Medicine medicine;
+	@Min(value=2)
 	private int quantity;
 	public int getCartitemId() {
 		return cartitemId;

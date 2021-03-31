@@ -9,15 +9,19 @@ import com.medicineshopping.demo.exceptions.CartItemException;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
 import com.medicineshopping.demo.exceptions.UserNotFoundException;
 
+/**
+ * @author shirdisai
+ *
+ */
 public interface CartItemSer {
 	
-	public CartItem addCartItem(CartItemDTO cartitemdto) throws CartException,MedicineNotFoundException,UserNotFoundException;
+	public CartItem addCartItem(CartItemDTO cartitemdto) throws CartException,MedicineNotFoundException,UserNotFoundException; //Adds cartitems to the cart
 	
-	public CartItem editCartItem(int cartitemId,int quantity) throws CartItemException;
+	public CartItem editCartItem(int cartitemId,int quantity) throws CartItemException; //Updates the cart items 
 	
-	public boolean removeCartItem(int cartitemId) throws CartItemException;
+	public boolean removeCartItem(int cartitemId) throws CartItemException; //Removes the cart items from cart
 	
-	public List<CartItem> getCartItem(String cartId)throws CartException;
+	public List<CartItem> getCartItem(String cartId)throws CartException; //Displays the cart items by cartid
 	
 
 	

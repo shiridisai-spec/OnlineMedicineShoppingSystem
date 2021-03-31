@@ -8,12 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="medicine_details")
+/**
+ * @author shirdisai
+ *
+ */
+@Entity //Entity is a group of states associated together in a single unit
+@Table(name="medicine_details") //Creates table with a table name
 public class Medicine {
-	@Id
-	@GeneratedValue
-	@Column(name="medicine_id")
+	@Id //Specifies primary key of entity
+	@GeneratedValue //Generates automatic object ID's for entity objects
+	@Column(name="medicine_id") //Specifies the column name
 	private int medicineId;
 	private String medicineName;
 	private String medicineBrand;

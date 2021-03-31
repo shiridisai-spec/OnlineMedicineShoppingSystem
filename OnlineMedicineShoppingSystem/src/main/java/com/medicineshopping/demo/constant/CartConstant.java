@@ -1,5 +1,9 @@
 package com.medicineshopping.demo.constant;
 
+/**
+ * @author shirdisai
+ *
+ */
 public class CartConstant {
 	
 	public static final String CART_NOT_FOUND="Cart Not Found";
@@ -11,5 +15,6 @@ public class CartConstant {
 	public static final String CART_EMPTY="No Items in the cart";
 	public static final String CART_ORDER_STATUS="order";
 	public static final String ORDER_EMPTY="No Order Found";
+	public static final String CARTITEM_GET="Cart item with given id found";
 
 }

@@ -1,7 +1,6 @@
 package com.medicineshopping.demo.service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +15,19 @@ import com.medicineshopping.demo.dto.MedicineDTO;
 import com.medicineshopping.demo.entity.Medicine;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
 
-@Service("medicineservice")
-@Transactional
+/**
+ * @author shirdisai
+ *
+ */
+@Service("medicineservice") //Contains the actual business logic
+@Transactional //Defines scope of a database transcation
 public class MedicineSerImpl implements MedicineSer{
 	
-	@Autowired
+	@Autowired //Injects the object dependency
 	MedicineRepo medicinerepo;
 
      @Override
-	 public int addMedicine(MedicineDTO medicinedto) {
+	 public int addMedicine(MedicineDTO medicinedto) {  
 		Medicine medicine=new Medicine();
 		medicine.setMedicineBrand(medicinedto.getMedicineBrand());
 		medicine.setMedicineCategory(medicinedto.getMedicineCategory());
@@ -32,6 +35,7 @@ public class MedicineSerImpl implements MedicineSer{
 		medicine.setMedicineDescription(medicinedto.getMedicineDescription());
 		medicine.setMedicineStatus(MedicineConstant.AVAILABLE);
 		medicine.setMedicineprice(medicinedto.getMedicineprice());
+		@SuppressWarnings("unused")//Removes compiler warnings
 		LocalDate strexpdate=medicinedto.getExpiryDate();
 		//LocalDate ldt=LocalDate.parse(strexpdate,DateTimeFormatter.ofPattern("yyyy-M-d"));
 		medicine.setExpiryDate(medicinedto.getExpiryDate());
@@ -42,12 +46,17 @@ public class MedicineSerImpl implements MedicineSer{
  
     
     @Override
-	public void deleteMedicine(int medicineId) 
+	public void deleteMedicine(int medicineId) throws MedicineNotFoundException 
     {
-		medicinerepo.deleteById(medicineId);
+    	Optional<Medicine> optmedicine=medicinerepo.findById(medicineId);
+    	if(optmedicine.isEmpty()) throw new MedicineNotFoundException(MedicineConstant.MEDICINE_NOT_FOUND);
+    	Medicine medicine=optmedicine.get();
+    	medicinerepo.delete(medicine);
+		//medicinerepo.deleteById(medicineId);
 	}
 	public Medicine getMedicineById(int medicineId) throws MedicineNotFoundException {
 		// TODO Auto-generated method stub
+		//Optional is a container object that contains not null objects
 		Optional <Medicine> optmedicine=medicinerepo.findById(medicineId);
 		if(optmedicine.isPresent())
 		{
@@ -57,24 +66,32 @@ public class MedicineSerImpl implements MedicineSer{
 	}
 
 	@Override
-	public Medicine updateMedicine(Medicine medicine) {
+	public List<Medicine> getAllMedicine() throws MedicineNotFoundException {
 		// TODO Auto-generated method stub
+		if(medicinerepo.findAll().isEmpty())
+		{
+			throw new MedicineNotFoundException(MedicineConstant.MEDICINE_NOT_FOUND);
+		}
+		else
+		{
+			return medicinerepo.findAll();
+		}
+		
+	}
+
+	@Override
+	public Medicine updateMedicine(Medicine medicine) throws MedicineNotFoundException {
+		// TODO Auto-generated method stub
+		if(medicine.getMedicineName().isEmpty())
+		{
+			throw new MedicineNotFoundException(MedicineConstant.MEDICINE_NOT_UPDATED);
+		}
+		else
+		{
 		return medicinerepo.save(medicine);
+		}
 	}
 
-	@Override
-	public List<Medicine> getAllMedicineByCategory(String medicineCategory) {
-		// TODO Auto-generated method stub
-		return medicinerepo.findAllMedicinesBymedicineCategory(medicineCategory);
-	}
 
-	@Override
-	public List<Medicine> getAllMedicine() {
-		// TODO Auto-generated method stub
-		return medicinerepo.findAll();
-	}
-	
-
-	
 	
 }

@@ -8,18 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="medicine_cart")
+/**
+ * @author shirdisai
+ *
+ */
+@Entity //Entity is a group of states associated together in a single unit
+@Table(name="medicine_cart") //Creates table with a table name
 public class Cart {
 	
-	 @Id
-	 @Column(name="cart_id")
+	 @Id //Specifies primary key of entity
+	 @Column(name="cart_id") //Names the column 
+	 @NotNull(message="cartid cannot be null")
 	 private String cartId;
 	 private LocalDate dateOfOrder;
 	 private String cartStatus;
-	 @ManyToOne
-	 @JoinColumn(name="user_id",referencedColumnName = "user_id")
+	 @ManyToOne //Manytoone relationship
+	 @JoinColumn(name="user_id",referencedColumnName = "user_id") //user_id is the primary key of User class and the foreign key of Cart class
 	 private User user;
 	 
 	public String getCartId() {

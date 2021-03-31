@@ -1,15 +1,21 @@
 package com.medicineshopping.demo.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+/**
+ * @author shirdisai
+ *
+ */
 public class PaymentDTO {
 		
 	private String cartId;
 	
 	private int userId;
-	
+	@NotNull(message="cardType cannot be null")
 	private String cardType;
-	
+	@Pattern(regexp="[A-Za-z0-9]{16}")
 	private String cardNo;
-	
 	private double paymentamount;
 
 

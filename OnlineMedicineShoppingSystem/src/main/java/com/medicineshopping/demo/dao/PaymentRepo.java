@@ -5,7 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.medicineshopping.demo.entity.Payment;
 
-@Repository
-public interface PaymentRepo extends JpaRepository<Payment,String>{
+/**
+ * @author shirdisai
+ *
+ */
+@Repository //A class level annotaion that does all the database operations
+public interface PaymentRepo extends JpaRepository<Payment,Integer>{
 
 }

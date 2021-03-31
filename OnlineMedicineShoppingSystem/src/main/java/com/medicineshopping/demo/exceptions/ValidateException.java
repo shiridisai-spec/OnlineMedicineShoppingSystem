@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.validation.FieldError;
 
+@SuppressWarnings("serial") //Disables the compiler warnings
 public class ValidateException extends Exception{
 
 	List<FieldError> lserror=new ArrayList<>();

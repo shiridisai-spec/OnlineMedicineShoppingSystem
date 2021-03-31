@@ -2,8 +2,15 @@ package com.medicineshopping.demo.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
+/**
+ * @author shirdisai
+ *
+ */
 public class CartDTO {
 	
+	@NotNull(message="cartid cannot be null")
 	private String cartId;
 	private LocalDate dateOfOrder;
 	public String getCartId() {

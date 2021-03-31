@@ -4,20 +4,27 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+/**
+ * @author shirdisai
+ *
+ */
 public class MedicineDTO {
 	
-	@Pattern(regexp="[A-Z][a-z]{3,20}")
+	@Pattern(regexp="[A-Z][a-z]{3,20}") //Sets a certain pattern
 	private String medicineName;
-	@Size(min=3)
+	@Size(min=3) //Minimum size should be 3
 	private String medicineBrand;
 	@Min(value=20,message="Price must be minimum RS20")
 	private double medicineprice;
 	private String medicineCategory;
 	@Future(message="Expiry Date must be future date")
 	private LocalDate expiryDate;
+	@NotNull(message="medicine description cannot be null")
 	private String medicineDescription;
 	public String getMedicineName() {
 		return medicineName;

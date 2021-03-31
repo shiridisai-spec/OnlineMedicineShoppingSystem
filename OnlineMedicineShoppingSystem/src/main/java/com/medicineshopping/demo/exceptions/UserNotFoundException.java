@@ -1,5 +1,10 @@
 package com.medicineshopping.demo.exceptions;
 
+/**
+ * @author shirdisai
+ *
+ */
+@SuppressWarnings("serial") //Disables compilation warnings
 public class UserNotFoundException extends Exception{
 
 	public UserNotFoundException() {

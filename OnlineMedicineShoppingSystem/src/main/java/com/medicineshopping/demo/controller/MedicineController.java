@@ -23,12 +23,16 @@ import com.medicineshopping.demo.exceptions.ValidateException;
 import com.medicineshopping.demo.service.MedicineSer;
 
 
-@RestController
+/**
+ * @author shirdisai
+ *
+ */
+@RestController //Maps web requests
 public class MedicineController {
 	
-	@Autowired 
+	@Autowired //injects object dependencies
 	MedicineSer medicineser;
-	@PostMapping("addmedicine")
+	@PostMapping("addmedicine") // Maps the HTTP POST requests on the specific handler method
 	public SuccessMessageDTO addMedicine(@Valid @RequestBody MedicineDTO medicinedto, BindingResult br) throws ValidateException
 	{
 		if(br.hasErrors()) 
@@ -37,35 +41,34 @@ public class MedicineController {
 		int id=medicineser.addMedicine(medicinedto);
 		return new SuccessMessageDTO(MedicineConstant.MEDICINE_ADDED + id);
 	}
-	
-	@PutMapping("updatemedicine")
-	public Medicine updateMedicine(@RequestBody Medicine medicine)
+    @PutMapping("updatemedicine")
+	public SuccessMessageDTO updateMedicine(@RequestBody Medicine medicine) throws MedicineNotFoundException
 	{
-		return medicineser.updateMedicine(medicine);
+    	@SuppressWarnings("unused")
+		Medicine med=medicineser.updateMedicine(medicine);
+    	return new SuccessMessageDTO(MedicineConstant.MEDICINE_EDITED);		
 	}
-	
-	@DeleteMapping("deletemedicinebyid/{mid}")
-	public void deleteMedicine(@PathVariable(name="mid") int medicineId)
+	@DeleteMapping("deletemedicine/{mid}") // Maps the HTTP DELETE requests on the specific handler method
+	public SuccessMessageDTO deletemedicineById(@PathVariable("mid")int medicineId) throws MedicineNotFoundException 
 	{
 		medicineser.deleteMedicine(medicineId);
+		return new SuccessMessageDTO(MedicineConstant.MEDICINE_DELETE + medicineId);
 	}
 	
-	@GetMapping("getmedicinebyid/{mid}")
-	public Medicine getMedicine(@PathVariable (name="mid") int medicineId) throws MedicineNotFoundException
+	@GetMapping("getmedicine/{mid}")
+	public SuccessMessageDTO getmedicinebyId(@PathVariable("mid") int medicineId) throws MedicineNotFoundException
 	{
-		return medicineser.getMedicineById(medicineId);
+		medicineser.getMedicineById(medicineId);
+		return new SuccessMessageDTO(MedicineConstant.MEDICINE_GET);
 	}
-	@GetMapping("getmedicinebycategory/{mcname}")
-	public List getMedicinebyCategory(@PathVariable (name="mcname") String medicineCategory) throws MedicineNotFoundException
-	{
-		return medicineser.getAllMedicineByCategory(medicineCategory);
-	}
-	@GetMapping("getallmedicines")
-	public List getAllMedicines(@RequestBody Medicine medicine)
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping("getallmedicines") //Maps the HTTP GET requests on the specific handler method
+	public List getAllMedicines() throws MedicineNotFoundException
 	{
 		return medicineser.getAllMedicine();
-		
 	}
+	
 
 
 }

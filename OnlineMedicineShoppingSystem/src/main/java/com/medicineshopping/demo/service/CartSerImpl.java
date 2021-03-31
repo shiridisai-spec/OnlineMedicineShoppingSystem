@@ -16,18 +16,23 @@ import com.medicineshopping.demo.entity.User;
 import com.medicineshopping.demo.exceptions.CartException;
 import com.medicineshopping.demo.exceptions.UserNotFoundException;
 
-@Service("cartservice")
-@Transactional
+/**
+ * @author shirdisai
+ *
+ */
+@Service("cartservice") //Contains actual business logic
+@Transactional //Defines Scope of a single database transcation
 public class CartSerImpl implements CartSer {
 	
-	@Autowired
+	@Autowired //Injects object dependencies
 	private CartRepo cartrepo;
-	@Autowired
+	@Autowired //Injects object dependencies
 	private UserRepo userrepo;
     
 	@Override
 	public String confirmOrder(int userId) throws UserNotFoundException, CartException {
 		// TODO Auto-generated method stub
+		//Optional is a container that contains non-null objects
 		 Optional<User> optuser=userrepo.findById(userId);
 		    if(optuser.isEmpty())
 		    {
@@ -46,6 +51,7 @@ public class CartSerImpl implements CartSer {
 	@Override
 	public List<Cart> getOrders(int userId) throws UserNotFoundException, CartException {
 		// TODO Auto-generated method stub
+		//Optional is a container that contains non-null objects
 		Optional<User> optuser=userrepo.findById(userId);
 	    if(optuser.isEmpty())
 	    {

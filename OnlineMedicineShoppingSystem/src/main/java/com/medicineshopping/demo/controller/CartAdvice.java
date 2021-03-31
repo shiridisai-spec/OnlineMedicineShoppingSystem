@@ -9,18 +9,22 @@ import com.medicineshopping.demo.dto.ErrorMessageDTO;
 import com.medicineshopping.demo.exceptions.CartException;
 import com.medicineshopping.demo.exceptions.CartItemException;
 
-@RestControllerAdvice
+/**
+ * @author shirdisai
+ *
+ */
+@RestControllerAdvice //Handles excpeions with restful API
 public class CartAdvice {
 	
-	@ExceptionHandler(CartItemException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CartItemException.class) //Handles the CartItemException class
+	@ResponseStatus(HttpStatus.NOT_FOUND) //Sets the status code of HTTP response
 	public ErrorMessageDTO handleNotItemException(CartItemException exception)
 	{
 		return new ErrorMessageDTO(exception.getMessage(),HttpStatus.NOT_FOUND.toString());
 	}
 	
-	@ExceptionHandler(CartException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CartException.class) //Handles the CartException class
+	@ResponseStatus(HttpStatus.NOT_FOUND) //Sets the status code of HTTP response
 	public ErrorMessageDTO handleCartException(CartException exception)
 	{
 		return new ErrorMessageDTO(exception.getMessage(),HttpStatus.NOT_FOUND.toString());

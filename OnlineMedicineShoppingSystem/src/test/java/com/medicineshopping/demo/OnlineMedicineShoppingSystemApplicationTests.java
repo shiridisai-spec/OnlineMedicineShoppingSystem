@@ -13,12 +13,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.medicineshopping.demo.dao.MedicineRepo;
+import com.medicineshopping.demo.dao.UserRepo;
 import com.medicineshopping.demo.entity.Medicine;
+import com.medicineshopping.demo.entity.User;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
+import com.medicineshopping.demo.exceptions.UserNotFoundException;
 import com.medicineshopping.demo.service.MedicineSerImpl;
+import com.medicineshopping.demo.service.UserSerImpl;
 @SpringBootTest
 public class OnlineMedicineShoppingSystemApplicationTests {
-    public static Optional<Medicine> optmedicine;
+    
+	public static Optional<Medicine> optmedicine;
 	@MockBean
 	private MedicineRepo medicinerepo;
 	@Autowired
@@ -39,5 +44,28 @@ public class OnlineMedicineShoppingSystemApplicationTests {
 	{
 		assertThrows(MedicineNotFoundException.class, ()->medicineser.getMedicineById(100));
 	}
-    
+	
+	
+	public static Optional<User> optuser;
+	@MockBean
+	private UserRepo userrepo;
+	@Autowired
+    private UserSerImpl userser;
+	@BeforeEach public void beforeeach2()
+	{
+		optuser=Optional.of(new User());
+		Mockito.when(userrepo.findById(2)).thenReturn(optuser);
+		Mockito.when(userrepo.findById(100)).thenThrow(UserNotFoundException.class);
+	}
+	@Test
+	public void testUserById_03() throws UserNotFoundException
+	{
+		assertNotNull(userser.getUserById(2));
+	}
+	@Test
+	public void testUserById_04()
+	{
+		assertThrows(UserNotFoundException.class, ()->userser.getUserById(100));
+	}
+	
 }

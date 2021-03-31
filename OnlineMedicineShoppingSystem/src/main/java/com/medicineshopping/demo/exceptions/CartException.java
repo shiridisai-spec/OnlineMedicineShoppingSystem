@@ -1,5 +1,6 @@
 package com.medicineshopping.demo.exceptions;
 
+@SuppressWarnings("serial") //Disables compilation warnings
 public class CartException extends Exception {
 
 	public CartException() {

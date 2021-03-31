@@ -9,10 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.medicineshopping.demo.entity.CartItem;
 
-@Repository
+/**
+ * @author shirdisai
+ *
+ */
+@Repository //Does all the database operations
 public interface CartItemRepo extends JpaRepository<CartItem,Integer> {
-	@Query("From CartItem ci where ci.cart.cartId=:cartid")
-	public List<CartItem> getCartItems(@Param("cartid") String cartId);
+	@Query("From CartItem ci where ci.cart.cartId=:cartid") //Declares finder queries directly on repository methods
+	public List<CartItem> getCartItems(@Param("cartid") String cartId); //@Param Extracts the query parameters
 	
 	
 	

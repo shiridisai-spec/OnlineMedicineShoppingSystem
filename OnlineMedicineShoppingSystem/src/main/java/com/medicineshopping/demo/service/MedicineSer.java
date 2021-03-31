@@ -5,24 +5,23 @@ import java.util.List;
 import com.medicineshopping.demo.dto.MedicineDTO;
 import com.medicineshopping.demo.entity.Medicine;
 import com.medicineshopping.demo.exceptions.MedicineNotFoundException;
-import com.sun.el.stream.Optional;
 
-@SuppressWarnings("unused")
+/**
+ * @author shirdisai
+ *
+ */
 public interface MedicineSer {
 	
-	int addMedicine(MedicineDTO medicinedto);
-	
-	//Medicine addMedicine(Medicine medicine);
-	
-	Medicine updateMedicine(Medicine medicine);
-	
-	void deleteMedicine(int medicineId);
-	
-	List<Medicine> getAllMedicine();
-	
-	Medicine getMedicineById(int medicineId) throws MedicineNotFoundException;
+	int addMedicine(MedicineDTO medicinedto);  //Adds the medicines to datatbase
 		
-	List<Medicine> getAllMedicineByCategory(String medicineCategory);
+	Medicine updateMedicine(Medicine medicine) throws MedicineNotFoundException ; //Updates the medicine details
+	
+	void deleteMedicine(int medicineId) throws MedicineNotFoundException; // Deletes medicines by passing the medicineid
+	
+	List<Medicine> getAllMedicine() throws MedicineNotFoundException; //Gets the detils of all the medicines
+	
+	Medicine getMedicineById(int medicineId) throws MedicineNotFoundException; //Gets the details of medicine by medicineid
+		
 	
 	
 	
